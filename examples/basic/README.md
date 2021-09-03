@@ -71,7 +71,7 @@ yarn zip
 
 - **config/env.js**
 
-```
+```javascript
 sandbox: {
   PUBLIC_URL: "/seashell/webapp/business/product/",
   REACT_APP_API: "http://sandbox.api.example.com/v1",
@@ -88,13 +88,13 @@ pathPrefix = 'seashell/webapp/business/product/'
 
 - 构建
 
-```
+```bash
 yarn build:sandbox
 ```
 
 - zip
 
-```
+```bash
 yarn zip
 ```
 

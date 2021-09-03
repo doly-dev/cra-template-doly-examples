@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter } from 'react-router-dom';
 import Routes from '@/components/Routes';
 import asyncComponent from '@/components/AsyncComponent';
+import { Provider, rootStore } from "@/models/Root";
 import './App.less';
 
 const routes = [
@@ -30,11 +31,13 @@ const routes = [
 
 function App() {
   return (
-    <HashRouter>
-      <div className='App'>
-        <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-      </div>
-    </HashRouter >
+    <Provider value={rootStore}>
+      <HashRouter>
+        <div className='App'>
+          <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
+        </div>
+      </HashRouter >
+    </Provider>
   )
 }
 

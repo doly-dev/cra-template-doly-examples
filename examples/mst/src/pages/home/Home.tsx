@@ -5,6 +5,7 @@ import { useAsync } from 'rc-hooks';
 import PageContainer from '@/components/PageContainer';
 import { login } from '@/services/login';
 import { getToken, setToken, removeToken } from '@/utils/storage';
+import Counter from './components/Counter';
 import styles from './Home.module.less';
 
 const { Item } = List;
@@ -60,6 +61,7 @@ const Home: React.FC = () => {
           }
         </Button>
       </WingBlank>
+      <Counter />
     </PageContainer>
   );
 };

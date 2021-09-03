@@ -12,11 +12,13 @@
 
 ## [mst]
 
-集成 [mobx-state-tree] 数据管理，参考 [React and MST]
+集成 [mobx-state-tree] 数据管理，参考 [React and MST]。
+
+> 学习文档：[MobX State Tree 数据组件化开发](https://juejin.cn/post/6844903772972384263)
 
 ## [keep-alive]
 
-集成 [react-activation](https://www.npmjs.com/package/react-activation)，处理路由缓存
+集成 [react-activation]，处理路由缓存
 
 [cra-template-doly]: https://www.npmjs.com/package/cra-template-doly
 [basic]: ./examples/basic
