@@ -10,7 +10,7 @@
 - 静态资源
 - sandbox 环境 或 部署第三方服务器
 
-## [mst]
+## [MST]
 
 集成 [mobx-state-tree] 数据管理，参考 [React and MST]。
 

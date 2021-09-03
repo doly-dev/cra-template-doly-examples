@@ -1,4 +1,4 @@
-# mst
+# MST
 
 集成 [mobx-state-tree] 数据管理，参考 [React and MST]
 
@@ -32,10 +32,50 @@ function App() {
 }
 ```
 
+## 枚举类型管理
+
+> - [Support Enums and union type for enumeration](https://github.com/mobxjs/mobx-state-tree/issues/605)
+
+要注意区分数字枚举和字符串枚举。
 
 
+- 服务接口定义的枚举数据
 
+**services/types/enum.ts**
 
+```typescript
+// 是否添加水印标记
+// 0-不添加 1-添加
+export enum WaterFlag {
+  No,
+  Yes,
+}
+
+// 颜色
+// red-红 green-绿 blue-蓝
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+```
+
+- MST 中的枚举
+
+**models/enum.ts**
+
+```typescript
+// 是否添加水印标记（数字枚举）
+// 0-不添加 1-添加
+export const EnumWaterFlag = types.union(
+  types.literal(WaterFlag.No),
+  types.literal(WaterFlag.Yes)
+);
+
+// 颜色（字符串枚举）
+// red-红 green-绿 blue-蓝
+export const EnumColor = types.enumeration<Color>(Object.values(Color));
+```
 
 
 [mobx-state-tree]: https://mobx-state-tree.js.org/
