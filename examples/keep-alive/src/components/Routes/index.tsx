@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, useLocation, matchPath } from 'react-router-dom';
 import type { RouteChildrenProps } from 'react-router-dom';
+import KeepAlive from 'react-activation';
 import type asyncComponent from '@/components/AsyncComponent';
 import CSSTransition from './CSSTransition';
 import { joinPaths } from './utils';
@@ -12,6 +13,9 @@ export type RouteItem = {
   component?: ReturnType<typeof asyncComponent> | React.ComponentType<RouteChildrenProps<any>>;
   routes?: RouteItem[];
   animated?: boolean;
+  keepAlive?: boolean;
+  keepAliveParamsKey?: string;
+  keepAliveName?: string;
 }
 
 function formatRoutes(routes?: RouteItem[], parentPath: string = '') {
@@ -33,7 +37,7 @@ function formatRoutes(routes?: RouteItem[], parentPath: string = '') {
   return ret;
 }
 
-export const AnimatedRoute: React.FC<Omit<RouteItem, 'routes'>> = ({ path, component: C, animated = true }) => {
+export const AnimatedRoute: React.FC<Omit<RouteItem, 'routes'>> = ({ path, component: C, animated = true, keepAlive = true, keepAliveName, keepAliveParamsKey }) => {
   if (!C) {
     return null;
   }
@@ -46,7 +50,19 @@ export const AnimatedRoute: React.FC<Omit<RouteItem, 'routes'>> = ({ path, compo
 
           const routeView = (
             <div className="router">
-              <C {...routeProps} />
+              {
+                keepAlive ? (
+                  <KeepAlive
+                    name={keepAliveName || path}
+                    id={keepAliveParamsKey && match?.params[keepAliveParamsKey] ? match.params[keepAliveParamsKey] : (void 0)}
+                  >
+                    <C {...routeProps} />
+                  </KeepAlive>
+                ) : (
+
+                  <C {...routeProps} />
+                )
+              }
             </div>
           )
 
@@ -88,7 +104,7 @@ const WrapperNoMatch: React.FC<RoutesProps> = ({ routes, noMatch: NoMatchCompone
     return null;
   }
 
-  return <AnimatedRoute path='*' component={NoMatchComponent} animated={animated} />;
+  return <AnimatedRoute path='*' component={NoMatchComponent} animated={animated} keepAliveName='404' />;
 }
 
 const Routes: React.FC<RoutesProps> = (props) => {

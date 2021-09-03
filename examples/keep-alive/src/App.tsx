@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
+import { AliveScope } from 'react-activation';
 import Routes from '@/components/Routes';
 import asyncComponent from '@/components/AsyncComponent';
 import './App.less';
@@ -22,7 +23,8 @@ const routes = [
       {
         path: 'detail/:name',
         name: '仓库详情',
-        component: asyncComponent(() => import('./pages/repos/Detail'))
+        component: asyncComponent(() => import('./pages/repos/Detail')),
+        keepAliveParamsKey: 'name'
       },
     ]
   }
@@ -31,9 +33,11 @@ const routes = [
 function App() {
   return (
     <HashRouter>
-      <div className='App'>
-        <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-      </div>
+      <AliveScope>
+        <div className='App'>
+          <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
+        </div>
+      </AliveScope>
     </HashRouter >
   )
 }

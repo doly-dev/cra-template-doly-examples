@@ -105,7 +105,8 @@ module.exports = {
   ],
   babel: {
     plugins: [
-      ['import', { libraryName: 'antd-mobile', style: true }]
+      ['import', { libraryName: 'antd-mobile', style: true }],
+      'react-activation/babel',
     ]
   }
 }
