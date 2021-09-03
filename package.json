@@ -1,0 +1,12 @@
+{
+  "name": "cra-template-doly-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:doly-dev/cra-template-doly-examples.git",
+  "author": "caijf <369756941@qq.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "examples/*"
+  ]
+}
