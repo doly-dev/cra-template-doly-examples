@@ -16,6 +16,8 @@ let initialState = RootModel.create({
   cart: { items: [] },
 });
 
+// 获取缓存数据
+// 需要注意退出登录清除、进入页面更新数据
 const data = localStorage.getItem("rootState");
 if (data) {
   const json = JSON.parse(data);
@@ -26,6 +28,7 @@ if (data) {
 
 export const rootStore = initialState;
 
+// 缓存数据
 onSnapshot(rootStore, (snapshot) => {
   console.log("Snapshot: ", snapshot);
   localStorage.setItem("rootState", JSON.stringify(snapshot));
