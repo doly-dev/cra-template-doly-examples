@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Routes from '@/components/Routes';
 import asyncComponent from '@/components/AsyncComponent';
 import { Provider, rootStore } from "@/models/Root";
@@ -31,13 +32,15 @@ const routes = [
 
 function App() {
   return (
-    <Provider value={rootStore}>
-      <HashRouter>
-        <div className='App'>
-          <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-        </div>
-      </HashRouter >
-    </Provider>
+    <HelmetProvider>
+      <Provider value={rootStore}>
+        <HashRouter>
+          <div className='App'>
+            <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
+          </div>
+        </HashRouter >
+      </Provider>
+    </HelmetProvider>
   )
 }
 
