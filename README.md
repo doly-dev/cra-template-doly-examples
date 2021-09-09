@@ -18,7 +18,7 @@
 
 ## [keep-alive]
 
-集成 [react-activation]，处理路由缓存
+集成 [react-activation]
 
 [cra-template-doly]: https://www.npmjs.com/package/cra-template-doly
 [basic]: ./examples/basic

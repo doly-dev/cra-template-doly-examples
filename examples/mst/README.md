@@ -9,11 +9,11 @@
 yarn add mobx mobx-react-lite mobx-state-tree
 ```
 
-## 数据管理
+## 使用步骤
 
-将 [https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models](https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models) 复制到 `src/models`下，部分类型错误需要调整，使用快速修复即可。
+1. 将 [https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models](https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models) 复制到 `src/models`下，部分类型错误需要调整，使用快速修复即可。
 
-然后，修改 `src/App.tsx`
+2. 修改 `src/App.tsx`
 
 ```typescript
 import { Provider, rootStore } from "@/models/Root";
@@ -36,7 +36,7 @@ function App() {
 
 > - [Support Enums and union type for enumeration](https://github.com/mobxjs/mobx-state-tree/issues/605)
 
-要注意区分数字枚举和字符串枚举。
+注意区分数字枚举和字符串枚举。
 
 
 - 服务接口定义的枚举数据
@@ -65,6 +65,9 @@ export enum Color {
 **models/enum.ts**
 
 ```typescript
+import { types } from 'mobx-state-box';
+import { WaterFlag, Color } from '@/services/types/enum';
+
 // 是否添加水印标记（数字枚举）
 // 0-不添加 1-添加
 export const EnumWaterFlag = types.union(

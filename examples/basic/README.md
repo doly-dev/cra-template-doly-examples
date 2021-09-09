@@ -21,9 +21,11 @@ prod: {
 
 ## 静态资源
 
-自定义项目路径，没有强规范约束。开发完成后，将资源打包到 `zip` 文件，再发布。
+自定义项目路径，没有强规范约束。开发完成后，资源打包 zip 文件，直接发布。
 
-示例：发布一个静态资源应用，发布到 `/seashell/webapp/business/product/` 路径下
+> 约定项目路径规则：/seashell/{电脑端=website | 移动端=webapp}/{业务名称}/{产品名称}/index.html
+
+示例：发布一个静态资源应用，部署在 `/seashell/webapp/business/product/` 路径下
 
 - **config/env.js**
 
@@ -54,12 +56,12 @@ yarn zip
 
 ## sandbox 环境 或 部署第三方服务器
 
-部署在特殊环境 或 第三方服务器，一般只是静态资源路径和接口地址不同而已。
+部署在特殊环境 或 第三方服务器，一般只是静态资源路径和接口地址不同，其它都和静态资源一样。
 
-所以只需要新增一个环境配置即可。
+所以只需要新增一个构建环境配置即可。
 
 
-示例：将上面静态资源，部署到 `sandbox.example.com` 域名服务器
+示例：将上面静态资源，部署到 `sandbox.example.com` 域名，接口地址为 `http://sandbox.api.example.com/v1`
 
 - **package.json**
 
