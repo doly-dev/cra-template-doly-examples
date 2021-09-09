@@ -1,9 +1,14 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createHashHistory } from 'history';
+import { syncHistory } from '@/utils/routerHistory';
 import { HelmetProvider } from 'react-helmet-async';
 import Routes from '@/components/Routes';
 import asyncComponent from '@/components/AsyncComponent';
 import './App.less';
+
+const hashHistory = createHashHistory();
+syncHistory(hashHistory);
 
 const routes = [
   {
@@ -32,11 +37,11 @@ const routes = [
 function App() {
   return (
     <HelmetProvider>
-      <HashRouter>
+      <Router history={hashHistory}>
         <div className='App'>
           <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
         </div>
-      </HashRouter >
+      </Router >
     </HelmetProvider>
   )
 }
