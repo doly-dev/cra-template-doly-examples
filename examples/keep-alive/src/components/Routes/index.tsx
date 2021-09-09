@@ -95,7 +95,7 @@ export interface RoutesProps {
   noMatch?: RouteItem['component'];
 }
 
-const WrapperNoMatch: React.FC<RoutesProps> = ({ routes, noMatch: NoMatchComponent, animated = true }) => {
+const WrapperNoMatch: React.FC<RoutesProps> = ({ routes, noMatch: NoMatchComponent }) => {
   const location = useLocation();
   const hasMatch = React.useMemo(() => routes.some(routeItem => matchPath(location.pathname, {
     path: routeItem.path,
@@ -107,7 +107,7 @@ const WrapperNoMatch: React.FC<RoutesProps> = ({ routes, noMatch: NoMatchCompone
     return null;
   }
 
-  return <AnimatedRoute path='*' name='404' component={NoMatchComponent} animated={animated} keepAliveName='404' />;
+  return <AnimatedRoute path='*' name='404' component={NoMatchComponent} animated={false} keepAliveName='404' />;
 }
 
 const Routes: React.FC<RoutesProps> = (props) => {
@@ -119,7 +119,7 @@ const Routes: React.FC<RoutesProps> = (props) => {
       {formattedRoutes.map(route => (
         <AnimatedRoute animated={animated} {...route} key={route.path} />
       ))}
-      <WrapperNoMatch routes={formattedRoutes} noMatch={noMatch} animated={animated} />
+      <WrapperNoMatch routes={formattedRoutes} noMatch={noMatch} />
     </div>
   );
 }
