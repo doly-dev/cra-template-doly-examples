@@ -1,7 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import Routes from '@/components/Routes';
+import Router from '@/components/Router';
 import asyncComponent from '@/components/AsyncComponent';
 import { Provider, rootStore } from "@/models/Root";
 import './App.less';
@@ -24,23 +22,33 @@ const routes = [
       {
         path: 'detail/:name',
         name: '仓库详情',
-        component: asyncComponent(() => import('./pages/repos/Detail'))
+        component: asyncComponent(() => import('./pages/repos/Detail')),
+        keepAliveParamsKey: 'name'
       },
     ]
-  }
+  },
+  {
+    path: '404',
+    name: '页面不存在',
+    component: asyncComponent(() => import('./pages/404'))
+  },
 ];
 
 function App() {
   return (
-    <HelmetProvider>
-      <Provider value={rootStore}>
-        <HashRouter>
-          <div className='App'>
-            <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-          </div>
-        </HashRouter >
-      </Provider>
-    </HelmetProvider>
+    <Provider value={rootStore}>
+      <div className='App'>
+        <Router
+          routes={routes}
+          noMatchPath='/404'
+          onRouteChange={(route) => {
+            if (route && route.name) {
+              document.title = route.name;
+            }
+          }}
+        />
+      </div>
+    </Provider>
   )
 }
 

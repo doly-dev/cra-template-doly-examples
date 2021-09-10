@@ -10,8 +10,6 @@
 - 静态资源
 - sandbox 环境 或 部署第三方服务器
 
-以及如何在工具模块中使用 `history`
-
 ## [MST]
 
 集成 [mobx-state-tree] 数据管理，参考 [React and MST]。

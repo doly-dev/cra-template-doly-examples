@@ -2,6 +2,7 @@
 
 集成 [mobx-state-tree] 数据管理，参考 [React and MST]
 
+> 学习文档：[MobX State Tree 数据组件化开发](https://juejin.cn/post/6844903772972384263)
 
 ## 安装依赖
 
@@ -22,11 +23,9 @@ import { Provider, rootStore } from "@/models/Root";
 function App() {
   return (
     <Provider value={rootStore}>
-      <HashRouter>
-        <div className='App'>
-          <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-        </div>
-      </HashRouter >
+      <div className='App'>
+        // ...
+      </div>
     </Provider>
   )
 }

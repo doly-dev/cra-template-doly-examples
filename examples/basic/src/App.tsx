@@ -1,14 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createHashHistory } from 'history';
-import { syncHistory } from '@/utils/routerHistory';
-import { HelmetProvider } from 'react-helmet-async';
-import Routes from '@/components/Routes';
+import Router from '@/components/Router';
 import asyncComponent from '@/components/AsyncComponent';
 import './App.less';
-
-const hashHistory = createHashHistory();
-syncHistory(hashHistory);
 
 const routes = [
   {
@@ -31,18 +24,27 @@ const routes = [
         component: asyncComponent(() => import('./pages/repos/Detail'))
       },
     ]
-  }
+  },
+  {
+    path: '404',
+    name: '页面不存在',
+    component: asyncComponent(() => import('./pages/404'))
+  },
 ];
 
 function App() {
   return (
-    <HelmetProvider>
-      <Router history={hashHistory}>
-        <div className='App'>
-          <Routes routes={routes} noMatch={asyncComponent(() => import('./pages/404'))} />
-        </div>
-      </Router >
-    </HelmetProvider>
+    <div className='App'>
+      <Router
+        routes={routes}
+        noMatchPath='/404'
+        onRouteChange={(route) => {
+          if (route && route.name) {
+            document.title = route.name;
+          }
+        }}
+      />
+    </div>
   )
 }
 

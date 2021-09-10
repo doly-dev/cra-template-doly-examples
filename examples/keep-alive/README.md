@@ -21,46 +21,24 @@ babel: {
 }
 ```
 
-2. 修改 App.tsx
+2. 修改 components/Router/index.tsx
 
 ```typescript
-import { AliveScope } from 'react-activation';
+import KeepAlive, { AliveScope } from 'react-activation';
 
 // ...
-// Router 下包裹 AliveScope 组件
-<Router>
-  <AliveScope>
-    <div className='App'>
-      <Routes routes={routes} ... />
-    </div>
-  </AliveScope>
-</Router>
-```
-
-3. 修改路由文件 components/Routes
-
-```typescript
-// ...
-// 引入模块
-import KeepAlive from 'react-activation';
-
-// 扩展routes配置项
 export type RouteItem = {
   // ...
-
   keepAlive?: boolean;
   keepAliveParamsKey?: string;
   keepAliveName?: string;
 }
 
+// AnimatedRoute 组件
+// props 增加 keepAlive = true, keepAliveName, keepAliveParamsKey
 // ...
-
-// 页面包裹 KeepAlive 组件
 const routeView = (
   <div className="router">
-    <Helmet>
-      <title>{name || ''}</title>
-    </Helmet>
     {
       keepAlive ? (
         <KeepAlive
@@ -75,6 +53,14 @@ const routeView = (
     }
   </div>
 )
+
+// WrapperRouter
+// Router 组件下添加 AliveScope
+<Router history={routerHistory}>
+  <AliveScope>
+    // ...
+  </AliveScope>
+</Router>
 ```
 
 ## 常见问题
