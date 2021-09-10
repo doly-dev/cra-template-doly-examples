@@ -5,6 +5,14 @@
   "repository": "git@github.com:doly-dev/cra-template-doly-examples.git",
   "author": "caijf <369756941@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "commit": "cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "private": true,
   "workspaces": [
     "examples/*"
