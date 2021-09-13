@@ -8,17 +8,9 @@ import { getReposList } from '@/services/repos';
 const { Item } = List;
 const { Brief } = Item;
 
-type DataType = {
-  name: string;
-  full_name: string;
-  html_url: string;
-  description: string;
-  [key: string]: any;
-}
-
 const ListPage: React.FC = () => {
   const history = useHistory();
-  const { data, loading } = useAsync<DataType[]>(getReposList, {
+  const { data, loading } = useAsync(getReposList, {
     persisted: true,
     cacheKey: "repos_list"
   });
@@ -32,7 +24,7 @@ const ListPage: React.FC = () => {
         data && !loading ? (
           <List renderHeader={() => 'doly-dev'}>
             {
-              data && data.length > 0 && data.map(({ name, description }: any) => (
+              data && data.length > 0 && data.map(({ name, description }) => (
                 <Item
                   key={name}
                   arrow="horizontal"
