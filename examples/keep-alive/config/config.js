@@ -63,6 +63,7 @@ module.exports = {
     if (env !== 'production') {
       devServerConfig.proxy = proxy[REACT_APP_ENV] || {};
     }
+    devServerConfig.publicPath = '/';
     return devServerConfig;
   },
   plugins: [
