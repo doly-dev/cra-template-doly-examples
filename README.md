@@ -20,10 +20,15 @@
 
 集成 [react-activation]
 
+## [freemode]
+
+在 APP 中，如果某些页面需要 native 提供下拉重新加载当前 webview。就要用 body 的滚动条，以防止和 Android 的下拉操作冲突。
+
 [cra-template-doly]: https://www.npmjs.com/package/cra-template-doly
 [basic]: ./examples/basic
 [mst]: ./examples/mst
 [keep-alive]: ./examples/keep-alive
+[freemode]: ./examples/freemode
 [mobx-state-tree]: https://mobx-state-tree.js.org/
 [react and mst]: https://mobx-state-tree.js.org/concepts/using-react
 [react-activation]: https://www.npmjs.com/package/react-activation
