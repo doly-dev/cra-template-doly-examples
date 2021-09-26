@@ -110,10 +110,32 @@ const WrapperRouter: React.FC<RoutesProps> = ({
 ```typescript
 // ...
 import { RouterContext } from '../Router';
+import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom'; // 新增文件
 
 // ...
 
   const { freemode } = React.useContext(RouterContext);
+
+  React.useEffect(() => {
+    const scrollContainer = freemode ? window : innerRef.current;
+
+    if (scrollContainer && typeof scrollTopLowerRef.current === 'function') {
+      const handleScroll = () => {
+        const sTop = getScrollTop(scrollContainer);
+        const sHeight = getScrollHeight(scrollContainer);
+        const cHeight = getClientHeight(scrollContainer);
+        const realLowerThreshold = lowerThreshold < 0 ? 0 : lowerThreshold;
+
+        if (sHeight - cHeight - sTop <= realLowerThreshold) {
+          scrollTopLowerRef.current?.();
+        }
+      }
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    }
+  }, [freemode, lowerThreshold]);
 
 // ...
 

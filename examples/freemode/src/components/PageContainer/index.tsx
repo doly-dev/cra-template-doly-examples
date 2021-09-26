@@ -2,6 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import PageContext from './PageContext';
 import { RouterContext } from '../Router';
+import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom';
 import styles from './index.module.less';
 
 export {
@@ -10,39 +11,41 @@ export {
 
 export interface PageContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   lowerThreshold?: number; // 离底部多少距离触发 onScrollToLower
-  onScrollToLower?: (event: MouseEvent | TouchEvent) => void; // 滚动至底部触发
+  onScrollToLower?: () => void; // 滚动至底部触发
 }
 
 const PageContainer = React.forwardRef<HTMLDivElement, PageContainerProps>(({
   children,
   lowerThreshold = 100,
   onScrollToLower,
-  onScroll,
   className,
   ...restProps
 }, ref) => {
   const { freemode } = React.useContext(RouterContext);
   const innerRef = React.useRef<HTMLDivElement>(null);
+  const scrollTopLowerRef = React.useRef(onScrollToLower);
+  scrollTopLowerRef.current = onScrollToLower;
 
-  const handleScroll = React.useCallback(
-    (e) => {
-      onScroll?.(e);
+  React.useEffect(() => {
+    const scrollContainer = freemode ? window : innerRef.current;
 
-      if (typeof onScrollToLower === 'function') {
-        const eTarget = e.target;
-        const sTop = eTarget.scrollTop;
-        const sHeight = eTarget.scrollHeight;
-        const cHeight = eTarget.clientHeight;
-
+    if (scrollContainer && typeof scrollTopLowerRef.current === 'function') {
+      const handleScroll = () => {
+        const sTop = getScrollTop(scrollContainer);
+        const sHeight = getScrollHeight(scrollContainer);
+        const cHeight = getClientHeight(scrollContainer);
         const realLowerThreshold = lowerThreshold < 0 ? 0 : lowerThreshold;
 
         if (sHeight - cHeight - sTop <= realLowerThreshold) {
-          onScrollToLower(e);
+          scrollTopLowerRef.current?.();
         }
       }
-    },
-    [lowerThreshold, onScroll, onScrollToLower],
-  );
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    }
+  }, [freemode, lowerThreshold]);
 
   // 转换给外部ref
   React.useImperativeHandle(ref, () => innerRef.current as HTMLDivElement, [innerRef]);
@@ -57,7 +60,6 @@ const PageContainer = React.forwardRef<HTMLDivElement, PageContainerProps>(({
         {...restProps}
         className={classnames(styles.page, { freemode }, className)}
         ref={innerRef}
-        onScroll={handleScroll}
       >
         {children}
       </div>
