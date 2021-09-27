@@ -1,5 +1,7 @@
 # freemode
 
+> 假定一些公共配置在 PageContainer 中，例如 NavBar 
+
 在 APP 中，如果某些页面需要 native 提供下拉重新加载当前 webview。就只能用 body 的滚动条，以防止和 Android 的下拉操作冲突。
 
 路由增加 freemode 配置项，开启后关闭对应页面切换动画，并重置 .router 和 .page 节点样式 (position、overflow)，使得对应页面启用 body 的滚动条。
