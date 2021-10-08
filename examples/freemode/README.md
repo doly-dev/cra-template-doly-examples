@@ -1,6 +1,6 @@
 # freemode
 
-> 假定一些公共配置在 PageContainer 中，例如 NavBar 
+> 假定一些公共配置在 PageContainer 中，例如 NavBar
 
 在 APP 中，如果某些页面需要 native 提供下拉重新加载当前 webview。就只能用 body 的滚动条，以防止和 Android 的下拉操作冲突。
 
@@ -27,17 +27,14 @@ export default createContext<{
 import classnames from 'classnames';
 import RouterContext from './RouterContext';
 
-export {
-  RouterContext
-}
+export { RouterContext };
 
 // ...
-
 
 export type RouteItem = {
   //...
   freemode?: boolean;
-}
+};
 
 // ...
 
@@ -60,7 +57,7 @@ const WrapperRouter: React.FC<RoutesProps> = ({
   }, [formattedRoutes]);
 
   React.useEffect(() => {
-    const unlisten = routerHistory.listen((location) => {
+    const unlisten = routerHistory.listen(location => {
       if (!onRouteChangeRef.current) {
         return;
       }
@@ -71,7 +68,7 @@ const WrapperRouter: React.FC<RoutesProps> = ({
     });
     return () => {
       unlisten();
-    }
+    };
   }, [formattedRoutes]);
 
   return (
@@ -79,14 +76,18 @@ const WrapperRouter: React.FC<RoutesProps> = ({
       <Router history={routerHistory}>
         <div className={classnames('router-wrapper', { freemode })}>
           {formattedRoutes.map(route => (
-            <AnimatedRoute {...route} animated={(animated || route.animated) && !freemode && !route.freemode} key={route.path} />
+            <AnimatedRoute
+              {...route}
+              animated={(animated || route.animated) && !freemode && !route.freemode}
+              key={route.path}
+            />
           ))}
           <WrapperNoMatch routes={formattedRoutes} noMatchPath={noMatchPath} />
         </div>
-      </Router >
+      </Router>
     </RouterContext.Provider>
   );
-}
+};
 ```
 
 修改 `index.less`
@@ -94,11 +95,11 @@ const WrapperRouter: React.FC<RoutesProps> = ({
 ```less
 // ...
 
-.router-wrapper.freemode{
+.router-wrapper.freemode {
   position: static;
   overflow: visible;
 
-  .router{
+  .router {
     position: static;
     overflow: visible;
   }
@@ -162,7 +163,7 @@ import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom'; //
   background-color: #f5f5f5;
 
   &:global {
-    &.freemode{
+    &.freemode {
       position: static;
       overflow: visible;
     }
@@ -181,7 +182,7 @@ const routes = [
     name: '首页',
     component: asyncComponent(() => import('./pages/home')),
     freemode: true
-  },
+  }
   // ...
 ];
 ```

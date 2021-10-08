@@ -39,7 +39,7 @@ prod: {
 - **config/zip.js**
 
 ```javascript
-pathPrefix = 'seashell/webapp/business/product/'
+pathPrefix = 'seashell/webapp/business/product/';
 ```
 
 - 构建
@@ -59,7 +59,6 @@ yarn zip
 部署在特殊环境 或 第三方服务器，一般只是静态资源路径和接口地址不同，其它都和静态资源一样。
 
 所以只需要新增一个构建环境配置即可。
-
 
 示例：将上面静态资源，部署到 `sandbox.example.com` 域名，接口地址为 `http://sandbox.api.example.com/v1`
 
@@ -85,7 +84,7 @@ sandbox: {
 - **config/zip.js**
 
 ```javascript
-pathPrefix = 'seashell/webapp/business/product/'
+pathPrefix = 'seashell/webapp/business/product/';
 ```
 
 - 构建

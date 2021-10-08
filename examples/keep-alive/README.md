@@ -16,7 +16,7 @@ yarn add react-activation
 babel: {
   plugins: [
     // ...
-    'react-activation/babel',
+    'react-activation/babel'
   ];
 }
 ```
