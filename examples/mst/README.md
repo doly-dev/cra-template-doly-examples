@@ -12,7 +12,33 @@ yarn add mobx mobx-react-lite mobx-state-tree
 
 ## 使用步骤
 
-1. 将 [https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models](https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models) 复制到 `src/models`下，部分类型错误需要调整，使用快速修复即可。
+1. 将 [https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models](https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models) 复制到 `src/models`下，部分类型错误需要调整，直接使用快速修复（[VSCode ESLint 插件](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)）。
+
+**注意以下缓存部分，如果没有用到，请酌情删除！**
+
+```typescript
+// ...
+
+// 实例 model 时，如果有缓存数据就使用
+// 需要注意退出登录清除、进入页面更新数据
+const data = localStorage.getItem('rootState');
+if (data) {
+  const json = JSON.parse(data);
+  if (RootModel.is(json)) {
+    initialState = RootModel.create(json);
+  }
+}
+
+// ...
+
+// 监听数据变动缓存数据
+onSnapshot(rootStore, snapshot => {
+  console.log('Snapshot: ', snapshot);
+  localStorage.setItem('rootState', JSON.stringify(snapshot));
+});
+
+// ...
+```
 
 2. 修改 `src/App.tsx`
 
@@ -44,14 +70,14 @@ function App() {
 ```typescript
 // 是否添加水印标记
 // 0-不添加 1-添加
-export enum WaterFlag {
+export enum EWaterFlag {
   No,
   Yes
 }
 
 // 颜色
 // red-红 green-绿 blue-蓝
-export enum Color {
+export enum EColor {
   Red = 'red',
   Green = 'green',
   Blue = 'blue'
@@ -64,15 +90,15 @@ export enum Color {
 
 ```typescript
 import { types } from 'mobx-state-box';
-import { WaterFlag, Color } from '@/services/types/enum';
+import { EWaterFlag, EColor } from '@/services/types/enum';
 
 // 是否添加水印标记（数字枚举）
 // 0-不添加 1-添加
-export const EnumWaterFlag = types.union(types.literal(WaterFlag.No), types.literal(WaterFlag.Yes));
+export const UWaterFlag = types.union(types.literal(EWaterFlag.No), types.literal(EWaterFlag.Yes));
 
 // 颜色（字符串枚举）
 // red-红 green-绿 blue-蓝
-export const EnumColor = types.enumeration<Color>(Object.values(Color));
+export const UColor = types.enumeration<EColor>(Object.values(EColor));
 ```
 
 [mobx-state-tree]: https://mobx-state-tree.js.org/
