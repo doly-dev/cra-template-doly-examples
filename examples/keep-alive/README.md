@@ -10,7 +10,7 @@ yarn add react-activation
 
 ## 使用步骤
 
-1. config/config.js 配置 babel
+1. `config/config.js` 配置 babel
 
 ```javascript
 babel: {
@@ -21,7 +21,7 @@ babel: {
 }
 ```
 
-2. 修改 components/Router/index.tsx
+2. 修改 `components/Router/index.tsx`
 
 ```typescript
 import KeepAlive, { AliveScope } from 'react-activation';
