@@ -16,7 +16,7 @@ let initialState = RootModel.create({
   cart: { items: [] },
 });
 
-// 获取缓存数据
+// 实例 model 时，如果有缓存数据就使用
 // 需要注意退出登录清除、进入页面更新数据
 const data = localStorage.getItem("rootState");
 if (data) {
@@ -28,7 +28,7 @@ if (data) {
 
 export const rootStore = initialState;
 
-// 缓存数据
+// 监听数据变动缓存数据
 onSnapshot(rootStore, (snapshot) => {
   console.log("Snapshot: ", snapshot);
   localStorage.setItem("rootState", JSON.stringify(snapshot));
