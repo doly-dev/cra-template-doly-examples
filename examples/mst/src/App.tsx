@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from '@/components/Router';
 import asyncComponent from '@/components/AsyncComponent';
-import { Provider, rootStore } from "@/models/Root";
+import { Provider, rootStore } from '@/models/Root';
 import './App.less';
 
 const routes = [
@@ -24,23 +24,23 @@ const routes = [
         name: '仓库详情',
         component: asyncComponent(() => import('./pages/repos/Detail')),
         keepAliveParamsKey: 'name'
-      },
+      }
     ]
   },
   {
     path: '404',
     name: '页面不存在',
     component: asyncComponent(() => import('./pages/404'))
-  },
+  }
 ];
 
 function App() {
   return (
     <Provider value={rootStore}>
-      <div className='App'>
+      <div className="App">
         <Router
           routes={routes}
-          noMatchPath='/404'
+          noMatchPath="/404"
           onRouteChange={(route) => {
             if (route && route.name) {
               document.title = route.name;
@@ -49,7 +49,7 @@ function App() {
         />
       </div>
     </Provider>
-  )
+  );
 }
 
 export default App;

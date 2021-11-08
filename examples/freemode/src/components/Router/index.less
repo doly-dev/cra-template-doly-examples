@@ -1,4 +1,5 @@
-.router-wrapper, .router{
+.router-wrapper,
+.router {
   position: absolute;
   left: 0;
   right: 0;
@@ -7,11 +8,11 @@
   overflow: hidden;
 }
 
-.router-wrapper.freemode{
+.router-wrapper.freemode {
   position: static;
   overflow: visible;
 
-  .router{
+  .router {
     position: static;
     overflow: visible;
   }
@@ -24,11 +25,11 @@
 }
 .router-slideIn-enter-active {
   transform: translate3d(0, 0, 0);
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 .router-slideIn-exit {
   transform: translate3d(-20%, 0, 0);
-  transition: transform .3s;
+  transition: transform 0.3s;
   z-index: 1;
 }
 .router-slideIn-exit-done {
@@ -41,15 +42,14 @@
 }
 .router-slideOut-enter-active {
   transform: translate3d(0, 0, 0);
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 .router-slideOut-exit {
   transform: translate3d(20%, 0, 0);
-  transition: transform .3s;
+  transition: transform 0.3s;
   z-index: 1;
 }
 .router-slideOut-exit-done {
   visibility: hidden;
 }
 // ----- router slide end
-

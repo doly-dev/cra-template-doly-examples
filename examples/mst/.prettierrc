@@ -6,7 +6,6 @@
   "useTabs": false,
   "semi": true,
   "bracketSpacing": true,
-  "arrowParens": "avoid",
-  "proseWrap": "never",
-  "requirePragma": true
+  "arrowParens": "always",
+  "proseWrap": "never"
 }

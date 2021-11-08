@@ -1,12 +1,5 @@
-import type {
-  Instance,
-  SnapshotIn
-} from "mobx-state-tree";
-import {
-  types,
-  getParent,
-  destroy
-} from "mobx-state-tree";
+import type { Instance, SnapshotIn } from 'mobx-state-tree';
+import { types, getParent, destroy } from 'mobx-state-tree';
 
 export const Tag = types.model({
   name: types.string
@@ -18,7 +11,7 @@ export const CartItem = types
     price: types.number,
     tags: types.optional(types.array(Tag), [])
   })
-  .actions(self => ({
+  .actions((self) => ({
     changeName(newName: string) {
       self.name = newName;
     },
@@ -34,17 +27,15 @@ export const Cart = types
   .model({
     items: types.optional(types.array(CartItem), [])
   })
-  .actions(self => ({
-    addCartItem(
-      cartItem: SnapshotIn<typeof CartItem> | Instance<typeof CartItem>
-    ) {
+  .actions((self) => ({
+    addCartItem(cartItem: SnapshotIn<typeof CartItem> | Instance<typeof CartItem>) {
       self.items.push(cartItem);
     },
     remove(item: SnapshotIn<typeof CartItem>) {
       destroy(item);
     }
   }))
-  .views(self => ({
+  .views((self) => ({
     get totalItems() {
       return self.items.length;
     },
