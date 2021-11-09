@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { List, ActivityIndicator } from 'antd-mobile';
 import { useAsync } from 'rc-hooks';
 import { useHistory } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { getReposList } from '@/services/repos';
 const { Item } = List;
 const { Brief } = Item;
 
-const ListPage: React.FC = () => {
+const ListPage = () => {
   const history = useHistory();
   const { data, loading } = useAsync(getReposList, {
     persisted: true,
