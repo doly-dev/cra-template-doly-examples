@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import { Button, List, WhiteSpace, Toast } from 'antd-mobile';
 import { useHistory } from 'react-router-dom';
 import { useAsync } from 'rc-hooks';
 import PageContainer from '@/components/PageContainer';
 import { login } from '@/services/login';
 import { getToken, setToken, removeToken } from '@/utils/tokenStorage';
+import Counter from './components/Counter';
 import styles from './Home.module.less';
-import { useState } from 'react';
 
 const { Item } = List;
 
@@ -66,6 +67,8 @@ const Home = () => {
       <Button type={logined ? undefined : 'primary'} loading={loading} onClick={toggleLogin}>
         {logined ? '退出登录' : loading ? '登录中' : '点击登录'}
       </Button>
+      <Counter />
+      <p>上面计数器状态在全局，切换页面或刷新没有影响</p>
     </PageContainer>
   );
 };
