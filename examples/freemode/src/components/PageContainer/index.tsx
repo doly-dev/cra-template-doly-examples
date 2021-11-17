@@ -1,8 +1,8 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom';
 import PageContext from './PageContext';
 import { RouterContext } from '../Router';
-import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom';
 import styles from './index.module.less';
 
 export { PageContext };

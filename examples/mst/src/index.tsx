@@ -1,8 +1,28 @@
+import './index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.less';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider, rootStore } from '@/models/Root';
+import Router from '@/components/Router';
+import routes from './routes';
+// import reportWebVitals from './reportWebVitals';
+
+function App() {
+  return (
+    <Provider value={rootStore}>
+      <div className="App">
+        <Router
+          routes={routes}
+          noMatchPath="/404"
+          onRouteChange={(route) => {
+            if (route && route.name) {
+              document.title = route.name;
+            }
+          }}
+        />
+      </div>
+    </Provider>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,4 +34,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+// reportWebVitals(console.log);

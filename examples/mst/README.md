@@ -32,7 +32,7 @@ if (data) {
 // ...
 
 // 监听数据变动缓存数据
-onSnapshot(rootStore, snapshot => {
+onSnapshot(rootStore, (snapshot) => {
   console.log('Snapshot: ', snapshot);
   localStorage.setItem('rootState', JSON.stringify(snapshot));
 });
@@ -40,7 +40,7 @@ onSnapshot(rootStore, snapshot => {
 // ...
 ```
 
-2. 修改 `src/App.tsx`
+2. 修改 `src/index.tsx`
 
 ```typescript
 import { Provider, rootStore } from '@/models/Root';
@@ -49,9 +49,7 @@ import { Provider, rootStore } from '@/models/Root';
 function App() {
   return (
     <Provider value={rootStore}>
-      <div className="App">
-        // ...
-      </div>
+      <div className="App">{/*...*/}</div>
     </Provider>
   );
 }

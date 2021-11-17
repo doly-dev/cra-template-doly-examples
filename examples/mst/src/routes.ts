@@ -1,7 +1,4 @@
-import React from 'react';
-import Router from '@/components/Router';
 import asyncComponent from '@/components/AsyncComponent';
-import './App.less';
 
 const routes = [
   {
@@ -21,8 +18,7 @@ const routes = [
       {
         path: 'detail/:name',
         name: '仓库详情',
-        component: asyncComponent(() => import('./pages/repos/Detail')),
-        keepAliveParamsKey: 'name'
+        component: asyncComponent(() => import('./pages/repos/Detail'))
       }
     ]
   },
@@ -33,20 +29,4 @@ const routes = [
   }
 ];
 
-function App() {
-  return (
-    <div className="App">
-      <Router
-        routes={routes}
-        noMatchPath="/404"
-        onRouteChange={(route) => {
-          if (route && route.name) {
-            document.title = route.name;
-          }
-        }}
-      />
-    </div>
-  );
-}
-
-export default App;
+export default routes;

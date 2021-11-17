@@ -55,7 +55,7 @@ const WrapperRouter: React.FC<RoutesProps> = ({
   }, [formattedRoutes]);
 
   React.useEffect(() => {
-    const unlisten = routerHistory.listen(location => {
+    const unlisten = routerHistory.listen((location) => {
       if (!onRouteChangeRef.current) {
         return;
       }
@@ -73,7 +73,7 @@ const WrapperRouter: React.FC<RoutesProps> = ({
     <RouterContext.Provider value={{ freemode }}>
       <Router history={routerHistory}>
         <div className={classnames('router-wrapper', { freemode })}>
-          {formattedRoutes.map(route => (
+          {formattedRoutes.map((route) => (
             <AnimatedRoute
               {...route}
               animated={(animated || route.animated) && !freemode && !route.freemode}
@@ -169,7 +169,7 @@ import { getScrollTop, getScrollHeight, getClientHeight } from '@/utils/dom'; //
 }
 ```
 
-3. `src/App.tsx`
+3. `src/routes.ts`
 
 比如首页启用 `freemode`
 
