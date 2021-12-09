@@ -1,4 +1,4 @@
-type RepoItem = {
+export type RepoItem = {
   name: string;
   full_name: string;
   html_url: string;
@@ -12,4 +12,4 @@ declare global {
   }
 }
 
-export {};
+export { };

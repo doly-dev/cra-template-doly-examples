@@ -3,7 +3,7 @@ import { Router, Route, Redirect, useLocation, matchPath } from 'react-router-do
 import type { RouteChildrenProps } from 'react-router-dom';
 import classnames from 'classnames';
 import routerHistory from '@/utils/history';
-import type asyncComponent from '@/components/AsyncComponent';
+import type asyncComponent from '@/components/asyncComponent';
 import CSSTransition from './CSSTransition';
 import { joinPaths } from './utils';
 import RouterContext from './RouterContext';

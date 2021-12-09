@@ -7,7 +7,6 @@ const WebpackBar = require('webpackbar');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { whenProd } = require('@craco/craco');
 const proxy = require('./proxy');
-const theme = require('./theme');
 
 const cwd = process.cwd();
 const { REACT_APP_ENV, MOCK } = process.env;
@@ -32,20 +31,14 @@ module.exports = {
           ...webpackConfig.optimization,
           // ref: https://github.com/facebook/create-react-app/issues/5372#issuecomment-678892998
           splitChunks: {
-            // 将多入口的公共部分单独打包
             minChunks: 2,
+            // 将公共部分单独打包
+            // 目前都使用 Tree-sharking 没有必要单独处理 node_modules（工具已单独处理 react 等部分单独提取）
             cacheGroups: {
-              vendor: {
-                name: 'vendor',
-                test: /[\\/]node_modules[\\/]/,
-                reuseExistingChunk: true
-              },
-              // 拆分公共样式，多个页面引入相同组件会产生相同的样式
-              commonStyle: {
+              common: {
                 name: 'common',
-                test: /\.(c|sc|le)ss$/,
-                minSize: 100,
-                chunks: 'all'
+                chunks: 'all',
+                minSize: 100
               },
               default: false
             }
@@ -86,7 +79,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: theme || {},
+            // modifyVars: {},
             javascriptEnabled: true
           }
         },
@@ -100,7 +93,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: theme || {},
+            // modifyVars: {},
             javascriptEnabled: true
           }
         },
@@ -120,7 +113,6 @@ module.exports = {
   ],
   babel: {
     plugins: [
-      ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile'],
       ...whenProd(() => [['transform-remove-console', { exclude: ['error', 'warn'] }]], [])
     ]
   }
