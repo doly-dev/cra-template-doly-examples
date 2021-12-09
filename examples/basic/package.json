@@ -61,7 +61,7 @@
     "**/*.{js,jsx,ts,tsx,json,css,scss,sass,less,md}": "prettier --write"
   },
   "gitHooks": {
-    "commit-msg": "commitlint --edit \"$1\""
+    "commit-msg": "node commitlint-override"
   },
   "config": {
     "commitizen": {
