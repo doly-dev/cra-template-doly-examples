@@ -63,10 +63,8 @@
     "**/*.{js,jsx,ts,tsx}": "eslint",
     "**/*.{js,jsx,ts,tsx,json,css,scss,sass,less,md}": "prettier --write"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "gitHooks": {
+    "commit-msg": "commitlint --edit \"$1\""
   },
   "config": {
     "commitizen": {
@@ -74,8 +72,8 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -97,7 +95,6 @@
     "cz-conventional-changelog": "^3.3.0",
     "env-cmd": "^10.1.0",
     "glob": "^7.1.6",
-    "husky": "4",
     "lint-staged": "^10.5.4",
     "mkdirp": "^1.0.4",
     "mocker-api": "^2.8.3",
@@ -114,6 +111,7 @@
     "stylelint-no-unsupported-browser-features": "^5.0.2",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
-    "webpackbar": "^5.0.0-3"
+    "webpackbar": "^5.0.0-3",
+    "yorkie": "^2.0.0"
   }
 }

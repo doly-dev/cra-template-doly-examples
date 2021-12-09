@@ -8,6 +8,9 @@
   "scripts": {
     "commit": "cz"
   },
+  "gitHooks": {
+    "commit-msg": "commitlint --edit \"$1\""
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -16,5 +19,8 @@
   "private": true,
   "workspaces": [
     "examples/*"
-  ]
+  ],
+  "devDependencies": {
+    "yorkie": "^2.0.0"
+  }
 }
