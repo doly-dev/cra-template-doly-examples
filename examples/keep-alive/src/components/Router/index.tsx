@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Router, Route, Redirect, useLocation, matchPath } from 'react-router-dom';
 import type { RouteChildrenProps } from 'react-router-dom';
+import classnames from 'classnames';
 import KeepAlive, { AliveScope } from 'react-activation';
 import routerHistory from '@/utils/history';
 import type asyncComponent from '@/components/asyncComponent';
@@ -66,7 +67,7 @@ export const AnimatedRoute: React.FC<Omit<RouteItem, 'routes'>> = ({
         const { match, history } = routeProps;
 
         const routeView = (
-          <div className="router">
+          <div className={classnames('route', { 'route-animated': animated })}>
             {keepAlive ? (
               <KeepAlive
                 name={keepAliveName || path}
@@ -88,7 +89,7 @@ export const AnimatedRoute: React.FC<Omit<RouteItem, 'routes'>> = ({
           return (
             <CSSTransition
               in={match !== null}
-              classNames={history.action === 'POP' ? 'router-slideOut' : 'router-slideIn'}
+              classNames={history.action === 'POP' ? 'route-backward' : 'route-forward'}
               timeout={300}
               unmountOnExit
             >
@@ -160,7 +161,7 @@ const WrapperRouter: React.FC<RoutesProps> = ({
   return (
     <Router history={routerHistory}>
       <AliveScope>
-        <div className="router-wrapper">
+        <div className="route-wrapper">
           {formattedRoutes.map((route) => (
             <AnimatedRoute animated={animated} {...route} key={route.path} />
           ))}
