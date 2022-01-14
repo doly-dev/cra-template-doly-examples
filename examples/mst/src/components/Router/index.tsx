@@ -27,7 +27,7 @@ function formatRoutes(routes?: RouteItem[], parentPath: string = '') {
 
       if (routes && routes.length > 0) {
         ret.push(...formatRoutes(routes, resolvePath));
-      } else if (component) {
+      } else {
         ret.push({ ...rest, path: resolvePath, component });
       }
     });
