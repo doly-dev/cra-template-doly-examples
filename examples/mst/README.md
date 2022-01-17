@@ -47,11 +47,7 @@ import { Provider, rootStore } from '@/models/Root';
 // ...
 
 function App() {
-  return (
-    <Provider value={rootStore}>
-      <div className="App">{/*...*/}</div>
-    </Provider>
-  );
+  return <Provider value={rootStore}>{/*...*/}</Provider>;
 }
 ```
 
