@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.15.2",
-    "axios": "^0.24.0",
+    "axios": "^0",
     "classnames": "^2.3.1",
     "history": "4",
     "mobx": "^6.3.10",
