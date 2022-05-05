@@ -12,21 +12,24 @@ const ListPage = () => {
   });
 
   return (
-    <PageContainer>
+    <PageContainer title="列表页">
       <div style={{ padding: 15 }}>
         {loading && (
           <div style={{ padding: 50, display: 'flex', justifyContent: 'center', color: 'gray' }}>
             列表页数据请求中...
           </div>
         )}
-        {data && !loading && data.length > 0 && (
+        {data &&
+          !loading &&
+          data.length > 0 &&
           data.map(({ name, description }) => (
             <div key={name}>
-              <h2><Link to={`/repos/detail/${name}`}>{name}</Link></h2>
+              <h2>
+                <Link to={`/repos/detail/${name}`}>{name}</Link>
+              </h2>
               <p>{description}</p>
             </div>
-          ))
-        )}
+          ))}
       </div>
     </PageContainer>
   );

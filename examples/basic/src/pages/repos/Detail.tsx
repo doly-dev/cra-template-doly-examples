@@ -4,11 +4,11 @@ import PageContainer from '@/components/PageContainer';
 import { getReposByName } from '@/services/repos';
 
 const DetailPage = () => {
-  const { name } = useParams<{ name: string }>();
-  const { data, loading } = useAsync(() => getReposByName(name));
+  const { name } = useParams();
+  const { data, loading } = useAsync(() => getReposByName(name!));
 
   return (
-    <PageContainer>
+    <PageContainer title="详情页">
       <div style={{ padding: 15 }}>
         {loading && (
           <div style={{ padding: 50, display: 'flex', justifyContent: 'center', color: 'gray' }}>
@@ -19,7 +19,12 @@ const DetailPage = () => {
           <div>
             <h2>{data.full_name}</h2>
             <p>{data.description}</p>
-            <p>链接：<a href={data?.html_url} target='_blank' rel="noreferrer">{data.html_url}</a></p>
+            <p>
+              链接：
+              <a href={data?.html_url} target="_blank" rel="noreferrer">
+                {data.html_url}
+              </a>
+            </p>
           </div>
         )}
       </div>

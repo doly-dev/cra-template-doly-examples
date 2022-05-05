@@ -1,5 +1,5 @@
 import { createHashHistory } from 'history';
 
-const HISTORY = createHashHistory();
+const myHistory = createHashHistory();
 
-export default HISTORY;
+export default myHistory;
