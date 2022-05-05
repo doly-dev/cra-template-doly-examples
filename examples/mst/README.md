@@ -12,7 +12,7 @@ yarn add mobx mobx-react-lite mobx-state-tree
 
 ## 使用步骤
 
-1. 将 [https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models](https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models) 复制到 `src/models`下，部分类型错误需要调整，直接使用快速修复（[VSCode ESLint 插件](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)）。
+1. 将 <https://github.com/ecklf/react-hooks-mobx-state-tree/tree/main/src/models> 复制到 `src/models`下，部分类型错误需要调整，直接使用快速修复（[VSCode ESLint 插件](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)）。
 
 **注意以下缓存部分，如果没有用到，请酌情删除！**
 
@@ -21,11 +21,13 @@ yarn add mobx mobx-react-lite mobx-state-tree
 
 // 实例 model 时，如果有缓存数据就使用
 // 需要注意退出登录清除、进入页面更新数据
-const data = localStorage.getItem('rootState');
-if (data) {
-  const json = JSON.parse(data);
-  if (RootModel.is(json)) {
-    initialState = RootModel.create(json);
+if (process.browser) {
+  const data = localStorage.getItem('rootState');
+  if (data) {
+    const json = JSON.parse(data);
+    if (RootModel.is(json)) {
+      initialState = RootModel.create(json);
+    }
   }
 }
 
@@ -47,8 +49,34 @@ import { Provider, rootStore } from '@/models/Root';
 // ...
 
 function App() {
-  return <Provider value={rootStore}>{/*...*/}</Provider>;
+  return (
+    // <React.StrictMode>
+    <Provider value={rootStore}>
+      <HistoryRouter history={myHistory}>
+        <AnimatedRoutes routes={routes} />
+      </HistoryRouter>
+    </Provider>
+    // </React.StrictMode>
+  );
 }
+```
+
+3. 组件中使用
+
+```typescript
+import { observer } from "mobx-react-lite";
+import { useMst } from '@/models/Root';
+
+const SomeComponent = observer(()=>{
+  const { cart } = useMst();
+  console.log(cart);
+
+  return (
+    // ...
+  )
+});
+
+export default SomeComponent;
 ```
 
 ## 枚举类型管理
