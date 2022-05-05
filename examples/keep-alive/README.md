@@ -21,48 +21,62 @@ babel: {
 }
 ```
 
-2. 修改 `components/Router/index.tsx`
+2. `src/index.tsx` 包裹 `AliveScope` 组件
 
 ```typescript
-import KeepAlive, { AliveScope } from 'react-activation';
-
+import { AliveScope } from 'react-activation';
 // ...
-export type RouteItem = {
-  // ...
-  keepAlive?: boolean;
-  keepAliveParamsKey?: string;
-  keepAliveName?: string;
+
+function App() {
+  return (
+    // <React.StrictMode>
+    <HistoryRouter history={myHistory}>
+      <AliveScope>
+        <AnimatedRoutes routes={routes} />
+      </AliveScope>
+    </HistoryRouter>
+    // </React.StrictMode>
+  );
 }
 
-// AnimatedRoute 组件
-// props 增加 keepAlive = true, keepAliveName, keepAliveParamsKey
 // ...
-const routeView = (
-  <div className={classnames('route', { 'route-animated': animated })}>
-    {
-      keepAlive ? (
-        <KeepAlive
-          name={keepAliveName || path}
-          id={keepAliveParamsKey && match?.params[keepAliveParamsKey] ? match.params[keepAliveParamsKey] : (void 0)}
-        >
-          <C {...routeProps} />
-        </KeepAlive>
-      ) : (
-        <C {...routeProps} />
-      )
-    }
-  </div>
-)
+```
+
+3. 在需要保持状态的组件中使用 `KeepAlive`
+
+如 `src/pages/repos/Detail.tsx`
+
+```typescript
+import KeepAlive from 'react-activation';
 
 // ...
 
-// WrapperRouter
-// Router 组件下添加 AliveScope
-<Router history={routerHistory}>
-  <AliveScope>
-    // ...
-  </AliveScope>
-</Router>
+const WrapperDetailPage = (props: any) => {
+  const { name } = useParams();
+
+  return (
+    <KeepAlive name="detail" id={name}>
+      <DetailPage {...props} />
+    </KeepAlive>
+  );
+};
+
+export default WrapperDetailPage;
+```
+
+**同时也要在 `src/components/PageContainer` 增加页面激活时设置标题**
+
+```typescript
+import { useActivate } from 'react-activation';
+
+// ...
+
+React.useEffect(() => {
+  setPageTitle();
+}, [setPageTitle]);
+
+// 页面激活时设置标题
+useActivate(setPageTitle);
 ```
 
 ## 常见问题

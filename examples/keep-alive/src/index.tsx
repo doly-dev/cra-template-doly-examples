@@ -1,30 +1,28 @@
 import './index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Router from '@/components/Router';
+import ReactDOM from 'react-dom/client';
+import { AliveScope } from 'react-activation';
+// ref: https://github.com/remix-run/react-router/issues/8264#issuecomment-991271554
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import myHistory from '@/utils/history';
+import AnimatedRoutes from './components/AnimatedRoutes';
 import routes from './routes';
 // import reportWebVitals from './reportWebVitals';
 
 function App() {
   return (
-    <Router
-      routes={routes}
-      noMatchPath="/404"
-      onRouteChange={(route) => {
-        if (route && route.name) {
-          document.title = route.name;
-        }
-      }}
-    />
+    // <React.StrictMode>
+    <HistoryRouter history={myHistory}>
+      <AliveScope>
+        <AnimatedRoutes routes={routes} />
+      </AliveScope>
+    </HistoryRouter>
+    // </React.StrictMode>
   );
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as Element);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
