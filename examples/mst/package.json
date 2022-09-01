@@ -9,7 +9,7 @@
     "mobx": "^6.5.0",
     "mobx-react-lite": "^3.3.0",
     "mobx-state-tree": "^5.1.4",
-    "rc-hooks": "^2.2.2",
+    "rc-hooks": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6",
