@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAsync } from 'rc-hooks';
 import PageContainer from '@/components/PageContainer';
 import { login } from '@/services/login';
-import { getToken, setToken, removeToken } from '@/utils/tokenStorage';
+import { getLoginInfo, setLoginInfo, removeLoginInfo } from '@/utils/storage';
 import ExampleImage from '@/assets/images/example@192x192.png';
 import Counter from './components/Counter';
 import styles from './Home.module.less';
@@ -20,18 +20,18 @@ const pages = [
 ];
 
 const Home = () => {
-  const [logined, setLogined] = useState(() => !!getToken());
-  const { loading, run } = useAsync(login, {
+  const [logined, setLogined] = useState(() => !!getLoginInfo()?.token);
+  const { loading, run } = useAsync(() => login({ username: 'test', password: '12345' }).then(res => res.data), {
     autoRun: false,
     onSuccess: (res) => {
-      setToken(res.data.token);
+      setLoginInfo(res);
       setLogined(true);
     }
   });
 
   const toggleLogin = () => {
     if (logined) {
-      removeToken();
+      removeLoginInfo();
       setLogined(false);
     } else {
       run();

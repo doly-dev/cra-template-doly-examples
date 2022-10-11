@@ -1,5 +1,4 @@
 import './index.less';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AliveScope } from 'react-activation';
 // ref: https://github.com/remix-run/react-router/issues/8264#issuecomment-991271554
