@@ -1,23 +1,19 @@
 import './index.less';
 import ReactDOM from 'react-dom/client';
-import { AliveScope } from 'react-activation';
-// ref: https://github.com/remix-run/react-router/issues/8264#issuecomment-991271554
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-import myHistory from '@/utils/history';
-import AnimatedRoutes from './components/AnimatedRoutes';
-import routes from './routes';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
+import { PageLoading } from './components/PageLoader';
 // import reportWebVitals from './reportWebVitals';
 
 function App() {
   return (
     // <React.StrictMode>
-    <HistoryRouter history={myHistory}>
-      <AliveScope>
-        <AnimatedRoutes routes={routes} />
-      </AliveScope>
-    </HistoryRouter>
+    <RouterProvider
+      router={router}
+      fallbackElement={<PageLoading />}
+    />
     // </React.StrictMode>
-  );
+  )
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as Element);

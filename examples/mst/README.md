@@ -52,9 +52,7 @@ function App() {
   return (
     // <React.StrictMode>
     <Provider value={rootStore}>
-      <HistoryRouter history={myHistory}>
-        <AnimatedRoutes routes={routes} />
-      </HistoryRouter>
+      <RouterProvider router={router} fallbackElement={<PageLoading />} />
     </Provider>
     // </React.StrictMode>
   );

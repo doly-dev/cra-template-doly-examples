@@ -21,24 +21,24 @@ babel: {
 }
 ```
 
-2. `src/index.tsx` 包裹 `AliveScope` 组件
+2. `src/router.tsx` 包裹 `AliveScope` 组件
 
 ```typescript
 import { AliveScope } from 'react-activation';
 // ...
 
-function App() {
-  return (
-    // <React.StrictMode>
-    <HistoryRouter history={myHistory}>
-      <AliveScope>
-        <AnimatedRoutes routes={routes} />
-      </AliveScope>
-    </HistoryRouter>
-    // </React.StrictMode>
-  );
-}
-
+const router = createHashRouter(
+  createRoutesFromElements(
+    <Route
+      path="*"
+      element={
+        <AliveScope>
+          <AnimatedRoutes routes={transformCustomRoutes(routes)} />
+        </AliveScope>
+      }
+    />
+  )
+);
 // ...
 ```
 
@@ -64,19 +64,18 @@ const WrapperDetailPage = (props: any) => {
 export default WrapperDetailPage;
 ```
 
-**同时也要在 `src/components/PageContainer` 增加页面激活时设置标题**
+**同时也要在 `src/components/AsyncComponent` 增加页面激活时设置标题**
 
 ```typescript
 import { useActivate } from 'react-activation';
 
 // ...
 
-React.useEffect(() => {
-  setPageTitle();
-}, [setPageTitle]);
-
-// 页面激活时设置标题
-useActivate(setPageTitle);
+useActivate(() => {
+  if (title) {
+    document.title = title;
+  }
+});
 ```
 
 ## 常见问题

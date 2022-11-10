@@ -4,7 +4,7 @@
 
 **特性**
 
-- 使用 [`react-router-dom@6`](https://reactrouter.com/docs/en/v6/api#api-reference) 封装
+- 使用 [`react-router-dom@6`](https://reactrouter.com/docs/en/v6/api#api-reference)
 - 支持路由切换动画，页面请使用 `PageContainer` 包裹
 
 ## API
@@ -14,17 +14,31 @@
 | routes   | 路由配置         | `RouteObject[]` | -      |
 | animated | 关闭页面切换动画 | `boolean`       | `true` |
 
-## 常见问题
-
-### 非组件模块中使用 history
-
-直接使用 `src/utils/history.ts` ：
+### RouteObject
 
 ```typescript
-import myHistory from '@/utils/history';
+// import { RouteObject } from 'react-router-dom';
+
+export interface RouteObject {
+  caseSensitive?: boolean;
+  children?: RouteObject[];
+  element?: React.ReactNode;
+  index?: boolean;
+  path?: string;
+}
+```
+
+## 常见问题
+
+### 非组件模块中如何跳转页面？
+
+使用 `src/router.tsx` ：
+
+```typescript
+import router from '@/router';
 
 // util function
 function xxx() {
-  myHistory.push('/');
+  router.navigate('/list');
 }
 ```

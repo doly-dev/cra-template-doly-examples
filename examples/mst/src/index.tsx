@@ -1,23 +1,22 @@
 import './index.less';
 import ReactDOM from 'react-dom/client';
-// ref: https://github.com/remix-run/react-router/issues/8264#issuecomment-991271554
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-import myHistory from '@/utils/history';
-import AnimatedRoutes from './components/AnimatedRoutes';
-import routes from './routes';
+import { RouterProvider } from 'react-router-dom';
 import { Provider, rootStore } from '@/models/Root';
+import router from './router';
+import { PageLoading } from './components/PageLoader';
 // import reportWebVitals from './reportWebVitals';
 
 function App() {
   return (
     // <React.StrictMode>
     <Provider value={rootStore}>
-      <HistoryRouter history={myHistory}>
-        <AnimatedRoutes routes={routes} />
-      </HistoryRouter>
+      <RouterProvider
+        router={router}
+        fallbackElement={<PageLoading />}
+      />
     </Provider>
     // </React.StrictMode>
-  );
+  )
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as Element);
