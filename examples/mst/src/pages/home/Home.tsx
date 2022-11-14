@@ -54,7 +54,7 @@ const Home = () => {
         </p>
         <Counter />
         <h3>示例页面</h3>
-        <p>路由在 src/routes.ts 中配置</p>
+        <p>路由在 src/router.tsx 中配置</p>
         <ul>
           {pages.map((item) => (
             <li key={item.name}>
