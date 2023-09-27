@@ -6,10 +6,8 @@
   "author": "caijf <369756941@qq.com>",
   "license": "MIT",
   "scripts": {
-    "commit": "cz"
-  },
-  "gitHooks": {
-    "commit-msg": "commitlint --edit \"$1\""
+    "commit": "cz",
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
@@ -17,13 +15,11 @@
     }
   },
   "private": true,
-  "workspaces": [
-    "examples/*"
-  ],
   "devDependencies": {
-    "@commitlint/cli": "^16.0.0",
-    "@commitlint/config-conventional": "^16.0.0",
+    "@commitlint/cli": "^16.3.0",
+    "@commitlint/config-conventional": "^16.2.4",
     "cz-conventional-changelog": "^3.3.0",
-    "yorkie": "^2.0.0"
+    "husky": "^8.0.3",
+    "typescript": "^4.9.5"
   }
 }
