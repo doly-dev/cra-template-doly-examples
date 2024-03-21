@@ -21,7 +21,23 @@ babel: {
 }
 ```
 
-2. `src/router.tsx` 包裹 `AliveScope` 组件
+2. `src/index.tsx` 改用 `render` 方法
+
+> [react-activation](https://www.npmjs.com/package/react-activation) NOTICE:
+> (React v18+) DO NOT use ReactDOMClient.createRoot, use ReactDOM.render instead,
+
+```diff
+- import ReactDOM from 'react-dom/client';
++ import ReactDOM from 'react-dom';
+
+// ...
+
+-const root = ReactDOM.createRoot(document.getElementById('root')!);
+-root.render(<App />);
++ReactDOM.render(<App />, document.getElementById('root')!);
+```
+
+3. `src/router.tsx` 包裹 `AliveScope` 组件
 
 ```typescript
 import { AliveScope } from 'react-activation';
@@ -42,7 +58,7 @@ const router = createHashRouter(
 // ...
 ```
 
-3. 在需要保持状态的组件中使用 `KeepAlive`
+4. 在需要保持状态的组件中使用 `KeepAlive`
 
 如 `src/pages/repos/Detail.tsx`
 
