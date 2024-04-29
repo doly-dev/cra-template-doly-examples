@@ -1,6 +1,7 @@
 import './index.less';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { AliveScope } from 'react-activation';
 import router from './router';
 import { PageLoading } from './components/PageLoader';
 // import reportWebVitals from './reportWebVitals';
@@ -8,15 +9,15 @@ import { PageLoading } from './components/PageLoader';
 function App() {
   return (
     // <React.StrictMode>
-    <RouterProvider
-      router={router}
-      fallbackElement={<PageLoading />}
-    />
+    <AliveScope>
+      <RouterProvider router={router} fallbackElement={<PageLoading />} />
+    </AliveScope>
     // </React.StrictMode>
-  )
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById('root')!);
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
