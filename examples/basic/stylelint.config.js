@@ -2,7 +2,6 @@ module.exports = {
   extends: [
     'stylelint-config-standard',
     'stylelint-config-css-modules',
-    'stylelint-config-prettier',
     'stylelint-no-unsupported-browser-features'
   ],
   plugins: ['stylelint-declaration-block-no-ignored-properties'],
@@ -21,7 +20,10 @@ module.exports = {
     'selector-id-pattern': null,
     'font-family-no-missing-generic-family-keyword': null,
     'rule-empty-line-before': null,
-    'selector-no-vendor-prefix': [true, { ignoreSelectors: ['::-webkit-input-placeholder', '/-moz-.*/'] }]
+    'selector-no-vendor-prefix': [
+      true,
+      { ignoreSelectors: ['::-webkit-input-placeholder', '/-moz-.*/'] }
+    ]
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts']
 };
