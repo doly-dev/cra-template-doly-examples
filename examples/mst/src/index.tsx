@@ -10,13 +10,10 @@ function App() {
   return (
     // <React.StrictMode>
     <Provider value={rootStore}>
-      <RouterProvider
-        router={router}
-        fallbackElement={<PageLoading />}
-      />
+      <RouterProvider router={router} fallbackElement={<PageLoading />} />
     </Provider>
     // </React.StrictMode>
-  )
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
